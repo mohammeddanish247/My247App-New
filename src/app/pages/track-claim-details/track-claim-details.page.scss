@@ -1,0 +1,123 @@
+ion-content{
+  --offset-top: 0px;
+  position: absolute;
+}
+.scroll-content {
+  background-color: #f4f4f7 !important;
+}
+ion-avatar img {
+  border-radius: 0% !important;
+}
+.gray-out {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.3;
+}
+.item-ios p,
+.item-md p {
+  font-size: 1rem;
+}
+/*
+* Rating System
+*/
+ul {
+  padding: 0px;
+  &.rating li {
+    padding: 5px 10px !important;
+    background: none;
+    color: #ffb400;
+    ion-icon {
+      font-size: 30px;
+    }
+  }
+}
+$timeline--background: #ffffff;
+$timeline--text: #000000;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  background: $timeline--background;
+  color: $timeline--text;
+  font-family: "IBM Plex Sans", sans-serif;
+  line-height: 1.3em;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+p {
+  margin: 0 0 1em;
+}
+.m-content {
+  margin: 0 auto;
+  h3 {
+    font-family: "IBM Plex Serif", sans-serif;
+    font-weight: 300;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+}
+.m-timeline {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: $timeline--background;
+  color: $timeline--text; // margin: 48px 0;
+  li {
+    position: relative;
+    padding: 0px 0px 23px 30px;
+    transition: all 100ms;
+    &::before,
+    &::after {
+      transition: all 100ms;
+    }
+    &::before {
+      display: block;
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 0;
+      z-index: 2;
+      background-color: #4caf50;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 5px solid rgba(222, 222, 222, 0.5);
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      margin-left: 10px;
+    }
+    &::after {
+      content: "";
+      display: block;
+      width: 1px;
+      background-color: #aeafae;
+      position: absolute;
+      top: 0;
+      left: 12px;
+      height: 100%;
+      z-index: 1;
+      margin-left: 10px;
+    }
+    &:first-child::after {
+      top: 15px;
+    }
+    &:last-child::after {
+      height: 15px;
+    }
+  }
+  &__date {
+    font-size: 0.8em;
+    margin: 0 0 0.3em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  p {
+    margin: 0 0 0.5em;
+  } 
+}

@@ -1,0 +1,385 @@
+<ion-header>
+  <ion-toolbar #toolbar>
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollEvents]="true" [appFadeHeader]="toolbar" [appFadeImage]="image" [productData]="productData">
+  <div class="top">
+    <ion-card class="header-card" #image>
+      <lottie-player src="../../../assets/anim/track.json"  background="#dd2127"  speed="1" loop autoplay></lottie-player>
+      <h3></h3>
+  </ion-card> 
+  </div>
+
+  <div class="bottom">
+    <h3 class="bottom-title">Track Claims</h3>
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-no-padding" size="7">
+            <ion-item color="secondary" class="no-padding" lines="none">
+              <ion-avatar slot="start">
+                <img src="assets/claim-icons/221753.svg" />
+              </ion-avatar>
+              <ion-label>
+                <h4>Current Status</h4>
+                <p>{{claimdetails.ClaimStatus}}</p>
+              </ion-label>
+            </ion-item>
+              <!-- <ion-item color="secondary" lines="none" lines="none">
+                <ion-avatar slot="start">
+                  <img src="assets/claim-icons/221753.svg" />
+                </ion-avatar>
+                <h4>Current Status</h4>
+                <p>{{claimdetails.ClaimStatus}}</p>
+              </ion-item> -->
+          </ion-col>
+          <ion-col class="ion-no-padding" size="5">
+              <ion-item color="secondary" class="no-padding" lines="none">
+                <ion-avatar slot="start">
+                  <img src="assets/claim-icons/628436.svg" />
+                </ion-avatar>
+                <ion-label>
+                <h4>Type</h4>
+                <p>{{claimdetails.ClaimType}}</p>
+                </ion-label>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <section>
+        <!-- Claim Timeline Start -->
+        <div *ngIf="claimdetails.ClaimType=='Claim'">
+          <ion-card>
+            <!-- Timeline Start -->
+            <div class="m-content">
+              <ul class="m-timeline">
+                <li
+                  *ngIf="claimdetails.ClaimRegistered&&claimdetails.ClaimRegistered!=-1"
+                  [class.gray-out]="!claimdetails.ClaimRegistered"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/628436.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Claim Registered</h3>
+                        <p>Date: {{claimdetails.ClaimRegistered}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.ExcessApplicable!=-1"
+                  [class.gray-out]="true"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/845773.svg" />
+                      </ion-avatar>
+                      <h3>Applicable Excess</h3>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.ExcessPaid!=-1"
+                  [class.gray-out]="!(claimdetails.ExcessPaid==0)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/962660.svg" />
+                      </ion-avatar>
+                      <h3>Excess Paid</h3>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.EngineersAssigned&&claimdetails.EngineersAssigned!=-1"
+                  [class.gray-out]="(claimdetails.EngineersAssigned==0)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/404471.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Engineers Assigned</h3>
+                      <p>{{claimdetails.EngineerName}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.AppointmentDate!=-1"
+                  [class.gray-out]="!(claimdetails.AppointmentDate)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/834736.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Appointment Scheduled</h3>
+                        <p *ngIf="claimdetails.AppointmentDate">
+                          Date: {{claimdetails.AppointmentDate}}
+                        </p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.EngineerOnRoute!=-1"
+                  [class.gray-out]="!(claimdetails.EngineerOnRoute)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/470717.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>On Route Date</h3>
+                        <p>{{claimdetails.EngineerOnRoute}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.AttendedDate!=-1"
+                  [class.gray-out]="!(claimdetails.AttendedDate)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/905806.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Attended on</h3>
+                        <p>{{claimdetails.AttendedDate}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.AwaitingAuth"
+                  [class.gray-out]="!(claimdetails.AwaitingAuth)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/556118.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Authorisation Required</h3>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.PartsETA"
+                  [class.gray-out]="!(claimdetails.PartsETA)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/535522.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Awaiting Parts</h3>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  [class.gray-out]="!(claimdetails.ClaimStatus=='Job Complete')"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/214353.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Completed</h3>
+                        <p>{{claimdetails.CompletionDate}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- Timeline End -->
+          </ion-card>
+        </div>
+        <br />
+        <div *ngIf="claimdetails.ClaimType=='Service'">
+          <ion-card>
+            <!-- Timeline Start -->
+            <div class="m-content">
+              <ul class="m-timeline">
+                <li
+                  *ngIf="claimdetails.ClaimRegistered&&claimdetails.ClaimRegistered!=-1"
+                  [class.gray-out]="!(claimdetails.ClaimRegistered)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/953736.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Service Request Received</h3>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.ExcessApplicable!=-1"
+                  [class.gray-out]="(claimdetails.ExcessApplicable==0)"
+                >
+                  <div>
+                    <ion-card>
+                      <ion-item color="secondary" lines="none">
+                        <ion-avatar slot="start">
+                          <img src="assets/claim-icons/engineer.svg" />
+                        </ion-avatar>
+                        <ion-label>
+                          <h3>Engineers Assigned</h3>
+                          <p *ngIf="claimdetails.EngineerName">
+                            {{claimdetails.EngineerName}}
+                          </p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-card>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.ExcessPaid!=-1"
+                  [class.gray-out]="!(claimdetails.ExcessPaid==0)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/962660.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Excess Paid</h3>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  *ngIf="claimdetails.EngineersAssigned!=-1"
+                  [class.gray-out]="(claimdetails.EngineersAssigned==0)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/404471.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Engineers Assigned</h3>
+                        <p>{{claimdetails.EngineerName}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+
+                <li
+                  *ngIf="claimdetails.AppointmentDate!=-1"
+                  [class.gray-out]="!(claimdetails.AppointmentDate)"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/834736.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Appointment Scheduled</h3>
+                        <p *ngIf="claimdetails.AppointmentDate">
+                          Date: {{claimdetails.AppointmentDate}}
+                        </p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+                <li
+                  [class.gray-out]="!(claimdetails.ClaimStatus=='Job Complete')"
+                >
+                  <div>
+                    <ion-item color="secondary" lines="none">
+                      <ion-avatar slot="start">
+                        <img src="assets/claim-icons/214353.svg" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>Job Completed</h3>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- Timeline End -->
+          </ion-card>
+        </div>
+      </section>
+
+      <div
+        *ngIf="claimdetails.ClaimType=='Service' && claimdetails.CertificateURL!=-1 && claimdetails.CertificateURL"
+      >
+        <ion-card (click)="navToLink(claimdetails.CertificateURL)">
+          <ion-item color="secondary" lines="none">
+            <ion-avatar slot="start">
+              <img src="assets/claim-icons/clipboard.svg" />
+            </ion-avatar>
+            <ion-icon item-end name="ios-arrow-forward"></ion-icon>
+            <ion-label>
+              <h3>Service Report</h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </div>
+
+      <div *ngIf="(claimdetails.ClaimStatus=='Job Complete')">
+        <!-- <div
+          *ngIf="claimdetails.CustomerSatisfaction&&claimdetails.CustomerSatisfaction!=-1"
+          class="cd-timeline-block"
+        >
+          <ion-card>
+            <ion-item color="secondary" lines="none" class="ion-text-center">
+              <h3>Customer Satisfaction</h3>
+              <rating
+                [(ngModel)]="claimdetails.CustomerSatisfaction"
+                readOnly="true"
+              ></rating>
+            </ion-item>
+          </ion-card>
+        </div>
+
+        <div
+          *ngIf="!claimdetails.CustomerSatisfaction||claimdetails.CustomerSatisfaction==-1">
+          <ion-card>
+            <ion-item color="secondary" lines="none" class="ion-text-center">
+              <h3>Customer Satisfaction</h3>
+              <rating
+                [(ngModel)]="customerSatisfaction"
+                readOnly="false"
+                (ngModelChange)="onClaimRatingChanged($event)"
+              ></rating>
+            </ion-item>
+          </ion-card>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

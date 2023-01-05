@@ -1,0 +1,61 @@
+<ion-content #content>
+  <div class="intro-main">
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button color="primary" (click)="goNext()">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="intro-top">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button color="primary" (click)="goBack()">
+            <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-button slot="end" color="primary" (click)="skipBtn()" fill="clear">
+          Skip
+        </ion-button>
+      </ion-toolbar>
+    </div>
+    <div class="slide-wrapper">
+      <ion-slides [options]="config" [pager]="true" #introSlides>
+        <ion-slide *ngFor="let s of slidesData">
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="12">
+                <div class="intro-card">
+                  <div class="intro-img">
+                    <img src="{{s.img}}" alt="">
+                  </div>
+                  <div class="intro-desc ion-text-center">
+                    <h4 class="ion-text-capitalize ion-no-margin">
+                      <b>{{s.h}}</b>
+                    </h4>
+                    <p>
+                      {{s.p}}
+                    </p>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+        <!-- <ion-slide>
+          <div class="intro-card">
+            <div class="intro-img">
+              <lottie-player src="../../../assets/anim/contact-us.json" speed="0.5" loop autoplay></lottie-player>
+            </div>
+            <div class="intro-desc ion-text-center">
+              <h4 class="ion-text-capitalize ion-no-margin">
+                <b>24-Hour Availability</b>
+              </h4>
+              <p>
+                Our emergency helpline is always open. If you need us, just call us anytime.
+              </p>
+            </div>
+          </div>
+        </ion-slide> -->
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>
